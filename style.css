@@ -65,6 +65,10 @@ body {
 	to { transform: translateX(0); }
 }
 
+.row:not(.active) > div {
+	border-color: #aaa;
+}
+
 .invalid > div {
 	border-color: red;
 }

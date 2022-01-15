@@ -73,7 +73,9 @@ export function commit() {
 			}
 		}
 		col = 1;
-		if (row < 6) ++row;
+		if (row < 6) {
+			rel(++row).classList.add('active');
+		}
 		else {
 			over = true;
 			alert(`Bad luck! The solution was ${target}.`);
