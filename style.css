@@ -53,3 +53,18 @@ body {
 .krow > div {
 	width: 2em;
 }
+
+.invalid {
+	animation: invalid 250ms linear 3;
+}
+
+@keyframes invalid {
+	from { transform: translateX(0); }
+	25% { transform: translateX(calc(-1em / 3)); }
+	75% { transform: translateX(calc(1em / 3)); }
+	to { transform: translateX(0); }
+}
+
+.invalid > div {
+	border-color: red;
+}

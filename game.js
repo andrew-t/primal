@@ -8,8 +8,13 @@ function el(r, c) {
 	return document.getElementById(`${r},${c}`);
 }
 
+function rel(r) {
+	return document.getElementById(`r${r}`);
+}
+
 export function guess(n) {
 	if (over) return;
+	rel(row).classList.remove('invalid');
 	el(row, col).innerHTML = n;
 	if (col < 5) ++col;
 }
@@ -24,6 +29,7 @@ function rowDone() {
 
 export function del() {
 	if (over) return;
+	rel(row).classList.remove('invalid');
 	if (rowDone()) clear(row, col);
 	else if (col == 1) clear(row, col);
 	else clear(row, --col);
@@ -32,11 +38,15 @@ export function del() {
 export function commit() {
 	if (over) return;
 	if (rowDone()) {
-		col = 1;
 		const used = [false, false, false, false, false];
 		const guess = [];
-		for (let i = 0; i < 5; ++i) {
+		for (let i = 0; i < 5; ++i)
 			guess[i] = el(row, i + 1).innerHTML;
+		if (!isPrime(parseInt(guess.join(''), 10))) {
+			rel(row).classList.add('invalid');
+			return;
+		}
+		for (let i = 0; i < 5; ++i) {
 			if (guess[i] == target[i]) {
 				used[i] = true;
 				el(row, i + 1).classList.add('green');
@@ -62,6 +72,7 @@ export function commit() {
 				}
 			}
 		}
+		col = 1;
 		if (row < 6) ++row;
 		else {
 			over = true;

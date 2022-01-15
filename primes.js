@@ -1,4 +1,5 @@
 export function isPrime(n) {
+	if (n < 2) return false;
 	const m = Math.sqrt(n);
 	for (let i = 2; i <= m; i++)
 		if (n % i == 0) return false;
